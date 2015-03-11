@@ -70,23 +70,18 @@ JSTACK.Swift = (function (JS, undefined) {
     };
 
 
-    // **Volume Operations**
+    // **Container Operations**
 
     //
-    // View a list of simple Volume entities. In
-    // [Requesting a List of Volumes](http://api.openstack.org/)
+    // View a list of simple Container entities. In
+    // [Requesting Account details and a List of Containers](http://api.openstack.org/)
     // there is more information about the JSON object that is returned.
-    
-    // EN CDMI NO SABEMOS CUAL ES EL PARAMETRO a !!!
     getcontainerlist = function (callback, error, region) {
         var url, onOk, onError;
         if (!check(region)) {
             return;
         }
-        url = params.url + '/volumes';
-        if (detailed !== undefined && detailed) {
-            url += '/detail';
-        }
+        url = params.url + '/';
 
         onOk = function (result) {
             if (callback !== undefined) {
@@ -102,24 +97,15 @@ JSTACK.Swift = (function (JS, undefined) {
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
     };
     // Create a Container.
-    // Arguments in this function are:
+    // Argument in this function is:
     //
-    // a. Mandatory
-    //
-    // * The `size` of volume in GB
-    //
-    // b. Optional
-    //
-    // * The `name` of the volume
-    //
-    // * The `description` of the volume
-    //
-    createcontainer = function (name, callback, error, region) {
+    // * The `container` container's name
+    createcontainer = function (container, callback, error, region) {
         var url, onOk, onError, data;
         if (!check(region)) {
             return;
         }
-        url = params.url + "/" + name;
+        url = params.url + "/" + container;
         data = {
             metadata: {}
         };
@@ -135,17 +121,20 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
-        JS.Comm.put(url, data, JSTACK.Keystone.params.token, onOK, onError, "container");
+        JS.Comm.put(url, data, JSTACK.Keystone.params.token, onOK, onError);
     };
     // Delete a Container entitiy. In
-    // [Deleting a Volume](http://api.openstack.org/)
+    // [Deleting a Container](http://api.openstack.org/)
     // there is more information about the JSON object that is returned.
-    deletecontainer = function (name, callback, error, region) {
+    // Argument in this function is:
+    //
+    // * The `container` container's name
+    deletecontainer = function (container, callback, error, region) {
         var url, onOk, onError;
         if (!check(region)) {
             return;
         }
-        url = params.url + '/' + name;
+        url = params.url + '/' + container;
 
         onOk = function (result) {
             if (callback !== undefined) {
@@ -158,36 +147,44 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
-        JS.Comm.del(url, JS.Keystone.params.token, onOk, onError, "container");
+        JS.Comm.del(url, JS.Keystone.params.token, onOk, onError);
     };
-    // Get a Volume entitiy. In
-    // [Retrieving a Volume](http://api.openstack.org/)
-    // there is more information about the JSON object that is returned.
-    getobjectlist = function (name, callback, error, region) {
-        var url, onOk, onError;
-        if (!check(region)) {
-            return;
-        }
-        url = params.url + '/' + name;
 
-        onOk = function (result) {
-            if (callback !== undefined) {
-                callback(result);
-            }
-        };
-        onError = function (message) {
-            if (error !== undefined) {
-                error(message);
-            }
-        };
 
-        JS.Comm.get(url, JS.Keystone.params.token, onOk, onError, "object");
-    };
-    // **Snapshot Operations**
+    // **Objects Operations**
 
     //
-    // View a list of simple Snapshot entities. In
-    // [Requesting a List of Snapshots](http://api.openstack.org/)
+    // View a list of simple Object entities. In
+    // [Requesting Container details and a List of Objects](http://api.openstack.org/)
+    // there is more information about the JSON object that is returned.
+    // Argument in this function is:
+    //
+    // * The `container` of the container
+    getobjectlist = function (container, callback, error, region) {
+        var url, onOk, onError;
+        if (!check(region)) {
+            return;
+        }
+        url = params.url + '/' + container;
+
+        onOk = function (result) {
+            if (callback !== undefined) {
+                callback(result);
+            }
+        };
+        onError = function (message) {
+            if (error !== undefined) {
+                error(message);
+            }
+        };
+
+        JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
+    };
+    
+
+    // NO ESTA LISTO
+    // Copies an object to another object in the object store. In
+    // [Requesting a Copy of Object](http://api.openstack.org/)
     // there is more information about the JSON object that is returned.
     copyobject = function (name, object, targetContainer, targetObject, callback, error, region) {
         var url, onOk, onError;
@@ -212,39 +209,32 @@ JSTACK.Swift = (function (JS, undefined) {
 
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
     };
-    // Create a Volume Snapshot.
+    // Upload an Object.
     // Arguments in this function are:
     //
-    // a. Mandatory
+    // * The `container`  name of the container in which the objects
+    //   is going to be upload.
     //
-    // * The `volume_id` of the volume
+    // * The `object` object's name
     //
-    // b. Optional
+    // * The `fileData` data to be uploaded
     //
-    // * The `name` of the snapshot
+    // * The `fileType` of the object
     //
-    // * The `description` of the snapshot
-    //
-    uploadobject = function (volume_id, name, description, callback, error, region) {
+    uploadobject = function (container, object, fileData, fileType, callback, error, region) {
         var url, onOk, onError, data;
         if (!check(region)) {
             return;
         }
 
+        url = params.url + '/' + container + '/' + object;
+
         data = {
-            "snapshot" : {
-                "volume_id" : volume_id,
-                "force" : true
-            }
+            "mimeType": fileType,
+            "metadata": {},
+            "valuetransferencoding": "base64",
+            "value": fileData
         };
-
-        if (name !== undefined) {
-            data.snapshot.display_name = name;
-        }
-
-        if (description !== undefined) {
-            data.snapshot.display_description = description;
-        }
 
         onOk = function (result) {
             if (callback !== undefined) {
@@ -257,40 +247,22 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
-        JS.Comm.post(params.url + '/snapshots', data, JS.Keystone.params.token, onOk, onError);
+        JS.Comm.put(url, data, JS.Keystone.params.token, onOk, onError);
     };
-    // Delete a Snapshot entitiy. In
-    // [Retrieving a Snapshot](http://api.openstack.org/)
+    // Download an Object. In
+    // [Get Object content](http://api.openstack.org/)
     // there is more information about the JSON object that is returned.
-    downloadobject = function (id, callback, error, region) {
+    // Argument in this function is:
+    //
+    // * The `container` container's name in which is the object located
+    //
+    // * The `object` name of the object 
+    downloadobject = function (container, object, callback, error, region) {
         var url, onOk, onError;
         if (!check(region)) {
             return;
         }
-        url = params.url + '/snapshots/' + id;
-
-        onOk = function (result) {
-            if (callback !== undefined) {
-                callback(result);
-            }
-        };
-        onError = function (message) {
-            if (error !== undefined) {
-                error(message);
-            }
-        };
-
-        JS.Comm.del(url, JS.Keystone.params.token, onOk, onError);
-    };
-    // Get a Snapshot entitiy. In
-    // [Retrieving a Snapshot](http://api.openstack.org/)
-    // there is more information about the JSON object that is returned.
-    deleteobject = function (id, callback, error, region) {
-        var url, onOk, onError;
-        if (!check(region)) {
-            return;
-        }
-        url = params.url + '/snapshots/' + id;
+        url = params.url + '/' + container + '/' + object;
 
         onOk = function (result) {
             if (callback !== undefined) {
@@ -305,6 +277,33 @@ JSTACK.Swift = (function (JS, undefined) {
 
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
     };
+    // Permantly delete an Object. In
+    // [Delete Object](http://api.openstack.org/)
+    // there is more information about the JSON object that is returned.
+    //
+    // * The `container` container's name in which is the object located
+    //
+    // * The `object` name of the object 
+    deleteobject = function (container, object, callback, error, region) {
+        var url, onOk, onError;
+        if (!check(region)) {
+            return;
+        }
+        url = params.url + '/' + container + '/' + object;
+
+        onOk = function (result) {
+            if (callback !== undefined) {
+                callback(result);
+            }
+        };
+        onError = function (message) {
+            if (error !== undefined) {
+                error(message);
+            }
+        };
+
+        JS.Comm.del(url, JS.Keystone.params.token, onOk, onError);
+    };
     // Public Functions and Variables
     // ------------------------------
     // This is the list of available public functions and variables
@@ -312,14 +311,14 @@ JSTACK.Swift = (function (JS, undefined) {
 
         // Functions:
         configure : configure,
-        getvolumelist : getvolumelist,
-        createvolume : createvolume,
-        deletevolume : deletevolume,
-        getvolume : getvolume,
-        getsnapshotlist : getsnapshotlist,
-        createsnapshot : createsnapshot,
-        deletesnapshot : deletesnapshot,
-        getsnapshot : getsnapshot
+        getcontainerlist : getcontainerlist,
+        createcontainer : createcontainer,
+        deletecontainer : deletecontainer,
+        getobjectlist : getobjectlist,
+        copyobject : copyobject,
+        uploadobject : uploadobject,
+        downloadobject : downloadobject,
+        deleteobject : deleteobject
     };
 
 }(JSTACK));
