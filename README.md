@@ -31,21 +31,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		sudo gem install sass
 	</pre>
 
-	<li>Clone the repository to your workspace and change to the `fi-ware-cloud-portal` new directory</li>
+	<li>Clone the repository to your workspace and change to the <code>fi-ware-cloud-portal</code> new directory</li>
 	<pre>
 		git clone git://github.com/ging/fi-ware-cloud-portal.git
 
 		cd fi-ware-cloud-portal
 	</pre>
 
-	<li>Copy `config.js.template` to `config.js` in `fi-ware-cloud-portal` directory</li>
+	<li>Copy <code>config.js.template</code> to <code>config.js</code> in <code>fi-ware-cloud-portal</code> directory</li>
 	<pre>
 		cp config.js.template config.js
 	</pre>
 
 	<li>Log in Cloud Portal (https://account.lab.fiware.org/) and head to your account details </li>
-
+	
+	<br /> 
+	
 	<li>Register a new application</li>
-	You'll have to configure `url` as `http://localhost` and `callback url` as `http://localhost/login`
+	You'll have to configure <sample>url</sample> as <sample>http://localhost</sample> and <sample>callback url</sample> as <sample>http://localhost/login</sample>
 	
 </ol>
