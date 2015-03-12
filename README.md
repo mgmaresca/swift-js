@@ -45,12 +45,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	<li>Log in Cloud Portal (https://account.lab.fiware.org/) and head to your account details </li>
 	
-
+	<p> </p>
 	
 	<li>Register a new application and bind it to your localhost</li>
 	<img src= "https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png"/>
-
-	
 
 	<li>Modify <code>config.js</code> file with the correct configuration and save changes</li>
 	<pre>
