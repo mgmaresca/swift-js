@@ -48,8 +48,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<br /> 
 	
 	<li>Register a new application</li>
-	![alt tag](https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png)
-	
+	<img src= "https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png"/>
+
 
 	<br /> 
 
