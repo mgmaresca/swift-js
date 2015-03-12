@@ -48,7 +48,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<br /> 
 	
 	<li>Register a new application</li>
-	You'll have to configure <b>url</b> as <b>http://localhost</b> and <b>callback url</b> as <b>http://localhost/login</b>
+	![alt tag](https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png)
+	
 
 	<br /> 
 
