@@ -48,7 +48,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<br /> 
 	
 	<li>Register a new application</li>
-	You'll have to configure **url** as **http://localhost** and **callback url** as **http://localhost/login**
+	You'll have to configure <b>url</b> as <b>http://localhost</b> and <b>callback url</b> as <b>http://localhost/login</b>
 
 	<br /> 
 
@@ -56,7 +56,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	<br />
 
-	```javascript
+	<pre>
 	// Mandatory. TCP port to bind the server to
 	config.http_port = 80;
 	
@@ -80,8 +80,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		password: '',
 		tenantId: ''
 	};
-	```
-	> Note: You can set the TCP port you prefer
+	</pre>
+	<blockquote>Note: You can set the TCP port you prefer</blockquote> 
 
 	<li>Install dependencies using npm and grunt and finally run the server</li>
 
