@@ -182,19 +182,32 @@ JSTACK.Swift = (function (JS, undefined) {
     };
     
 
-    // NO ESTA LISTO
-    // Copies an object to another object in the object store. In
+    // Copies an Object to another Object in the Object store. In
     // [Requesting a Copy of Object](http://api.openstack.org/)
     // there is more information about the JSON object that is returned.
-    copyobject = function (name, object, targetContainer, targetObject, callback, error, region) {
-        var url, onOk, onError;
+    // Argument in this function is:
+    //
+    // * The `sourceContainer` name of the source Container
+    //
+    // * The `sourceObject` name of the source Object
+    //
+    // * The `targetContainer` name of the target container
+    //
+    // * The `targetObject` name of the targetObject
+    copyobject = function (sourceContainer, sourceObject, targetContainer, targetObject, callback, error, region) {
+        var url, src, onOk, onError;
+        var headers = {};
+
         if (!check(region)) {
             return;
         }
-        url = params.url + '/' + targetContainer + '/' + ;
-        if (detailed !== undefined && detailed) {
-            url += '/detail';
-        }
+
+        src = '/' + sourceContainer + '/' + sourceObject;
+        url = params.url + '/' + targetContainer + '/' + targetObject;
+
+        headers["X-Copy-From"] = src;
+        headers["Content-Length"] = "0";
+        console.log("Edited header content: " + headers);
 
         onOk = function (result) {
             if (callback !== undefined) {
@@ -207,7 +220,7 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
-        JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
+        JS.Comm.get(url, JS.Keystone.params.token, onOk, onError, headers);
     };
     // Upload an Object.
     // Arguments in this function are:
