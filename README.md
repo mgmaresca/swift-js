@@ -45,18 +45,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	<li>Log in Cloud Portal (https://account.lab.fiware.org/) and head to your account details </li>
 	
-	<br /> 
+
 	
-	<li>Register a new application</li>
-	<img src= "https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png"/>
+	<li>Register a new application and bind it to your localhost</li>
+	<div>
+		<img src= "https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png"/>
+	</div>
 
-
-	<br /> 
+	
 
 	<li>Modify <code>config.js</code> file with the correct configuration and save changes</li>
-
-	<br />
-
 	<pre>
 	// Mandatory. TCP port to bind the server to
 	config.http_port = 80;
@@ -85,7 +83,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<blockquote>Note: You can set a different TCP port, but you will have to indicate that change in the application configuration and the <code>config.js</code> file.</blockquote> 
 
 	<li>Install dependencies using npm and grunt and finally run the server</li>
-
 	<pre>
 		sudo npm install
 
