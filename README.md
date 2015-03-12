@@ -81,7 +81,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		tenantId: ''
 	};
 	</pre>
-	<blockquote>Note: You can set the TCP port you prefer</blockquote> 
+	<blockquote>Note: You can set a different TCP port, but you will have to indicate that change in the application configuration and the <code>config.js</code> file.</blockquote> 
 
 	<li>Install dependencies using npm and grunt and finally run the server</li>
 
