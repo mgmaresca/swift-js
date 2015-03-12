@@ -48,9 +48,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	
 	<li>Register a new application and bind it to your localhost</li>
-	<div>
-		<img src= "https://github.com/mgmaresca/swift-js/blob/master/img/register_app.png"/>
-	</div>
+	
 
 	
 
