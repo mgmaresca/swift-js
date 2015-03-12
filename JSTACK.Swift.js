@@ -94,6 +94,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Listed your containers");
+        console.log("GET ", url, " token ", JSTACK.Keystone.params.token);
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
     };
     // Create a Container.
@@ -121,6 +123,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Created new container ", container);
+        console.log("PUT ", url, " data ", data, " token ", JSTACK.Keystone.params.token);
         JS.Comm.put(url, data, JSTACK.Keystone.params.token, onOK, onError);
     };
     // Delete a Container entitiy. In
@@ -147,6 +151,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Deleted container ", container);
+        console.log("DEL ", url, " token ", JSTACK.Keystone.params.token);
         JS.Comm.del(url, JS.Keystone.params.token, onOk, onError);
     };
 
@@ -177,7 +183,9 @@ JSTACK.Swift = (function (JS, undefined) {
                 error(message);
             }
         };
-
+        
+        console.log("Listed container ", container, " objects");
+        console.log("GET ", url, " token ", JSTACK.Keystone.params.token);
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
     };
     
@@ -220,6 +228,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Copied object ", sourceObjects, " from container ", sourceContainer, " to object ", targetObject, " in container ", targetObject);
+        console.log("GET ", url, " token ", JSTACK.Keystone.params.token);
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError, headers);
     };
     // Upload an Object.
@@ -260,6 +270,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Uploaded object ", object, " to container ", container);
+        console.log("PUT ", url, " data ", data, " token ", JSTACK.Keystone.params.token);
         JS.Comm.put(url, data, JS.Keystone.params.token, onOk, onError);
     };
     // Download an Object. In
@@ -288,6 +300,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Downloaded object ", object, " from container ", container);
+        console.log("GET ", url, " token ", JSTACK.Keystone.params.token);
         JS.Comm.get(url, JS.Keystone.params.token, onOk, onError);
     };
     // Permantly delete an Object. In
@@ -315,6 +329,8 @@ JSTACK.Swift = (function (JS, undefined) {
             }
         };
 
+        console.log("Deleted object ", object, " from container ", container);
+        console.log("DEL ", url, " token ", JSTACK.Keystone.params.token);
         JS.Comm.del(url, JS.Keystone.params.token, onOk, onError);
     };
     // Public Functions and Variables
