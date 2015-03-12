@@ -48,6 +48,50 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<br /> 
 	
 	<li>Register a new application</li>
-	You'll have to configure <sample>url</sample> as <sample>http://localhost</sample> and <sample>callback url</sample> as <sample>http://localhost/login</sample>
+	You'll have to configure **url** as **http://localhost** and **callback url** as **http://localhost/login**
+
+	<br /> 
+
+	<li>Modify <code>config.js</code> file with the correct configuration and save changes</li>
+
+	<br />
+
+	```javascript
+	// Mandatory. TCP port to bind the server to
+	config.http_port = 80;
+	
+	config.useIDM = false;
+
+	// OAuth configuration. Only set this configuration if useIDM is true.
+	config.oauth = {
+		account_server: 'https://account.lab.fiware.org',
+	    client_id: '',
+	    client_secret: '',
+	    callbackURL: ''
+	};
+
+	// Keystone configuration.
+	config.keystone = {
+		host: 'cloud.lab.fiware.org',
+		port: 4730,
+		admin_host: 'cloud.lab.fiware.org',
+		admin_port: 4731, 
+		username: '', 
+		password: '',
+		tenantId: ''
+	};
+	```
+	> Note: You can set the TCP port you prefer
+
+	<li>Install dependencies using npm and grunt and finally run the server</li>
+
+	<pre>
+		sudo npm install
+
+		./node_modules/grunt-cli/bin/grunt debug
+
+		sudo node server.js
+
+	</pre>
 	
 </ol>
